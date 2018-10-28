@@ -1,0 +1,14 @@
+//http://35.154.2.160/tavant/node-js-ppt/nodejs-guide.pdf
+//page 11
+var http = require('http');
+let i = 0;
+console.log("server started + i="+i);
+var server = http.createServer(
+	function (req, res) {
+		i++;
+		res.statusCode = 200;
+		res.write("Hello world "+i +"  ");
+		res.end();
+	});
+
+server.listen(3000);

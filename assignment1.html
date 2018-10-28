@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+	<script>
+		print = function (msg) {
+			console.log(msg);
+		}
+
+		/*timeOutCb = function(msg, time, count){
+			var innerFunc = function(){
+			print(msg+ ":" + count);
+			countWithTimeOut(msg, time, count-1);
+			}
+			return innerFunc;
+		} */
+
+		countWithTimeOut = function (msg, time, count) {
+			if (count > 0) {
+				setTimeout(function () {
+					print(msg + ":" + count);
+					countWithTimeOut(msg, time, count - 1);
+				}, time);
+			}
+		}
+	</script>
+
+
+	<button type="button" onclick="countWithTimeOut('button 1',1000,10)">
+button 1</button>
+	<button type="button" onclick="countWithTimeOut('button 2',2000,3)">
+button 2</button>
+
+
+
+</body>
+
+</html>
