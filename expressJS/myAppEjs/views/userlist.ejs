@@ -1,0 +1,81 @@
+<html>
+
+<head>
+    <title>
+        <%= title %>
+    </title>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script>
+        function showUserList() {
+            window.location.href = "/api/userList";
+        }
+
+        function doLogout() {
+            location = "/login";
+        }
+
+        function showAboutUs() {
+            location = "/about-us";
+        }
+        function addUser() {
+            location = "/add-user";
+        }
+        function doDelete(id) {
+            $.post("http://localhost:3000/api/del-user/" + id, {}, function (data) {
+                if (data === 'Success') {
+                    window.location.href = "/api/userList";
+                }
+            });
+        }
+    </script>
+</head>
+
+<body>
+    <h1>
+        <%= title %>
+    </h1>
+    <button>HOME</button> |
+    <button onclick="showUserList()">USER LIST</button> |
+    <button onclick="showAboutUs()">ABOUT US</button> |
+    <button onclick="doLogout()">LOGOUT</button> |
+    <hr><br>
+    <button onclick="addUser()"> + Add User</button>
+    <hr><br>
+    <div>
+        <table border="1">
+            <tr>
+                <th>Id</th>
+                <th> Name</th>
+                <th>City</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+            <% if(data.length){                                 
+                for(var i = 0;i < data.length;i++) { %>
+                <tr>
+
+                    <td>
+                        <%=data[i].id%>
+                    </td>
+                    <td>
+                        <%=data[i].name%>
+                    </td>
+                    <td>
+                        <%=data[i].City%>
+                    </td>
+
+                    <td><button onclick="doEdit(<%=data[i].id%>);">Edit</button></td>
+                    <td><button onclick="doDelete(<%=data[i].id%>);">Delete</button></td>
+                </tr>
+                <% }
+           
+            }else{ %>
+                    <tr>
+                        <td colspan="7">No users</td>
+                    </tr>
+                    <% } %>
+        </table>
+    </div>
+</body>
+
+</html>

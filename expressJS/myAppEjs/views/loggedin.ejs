@@ -1,0 +1,32 @@
+<html>
+        
+        <head>
+            <title><%= title %></title>
+            <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+            <script>
+                function showUserList(){
+                    window.location.href = "/api/userList";
+                }
+        
+                function doLogout(){
+                    location = "/login";
+                }
+        
+                function showAboutUs(){
+                    location = "/about-us";
+                }
+            </script>
+        </head>
+        
+        <body>
+            <h1><%= title %></h1>
+            <button>HOME</button> |
+            <button onclick="showUserList()">USER LIST</button> |
+            <button onclick="showAboutUs()">ABOUT US</button> |
+            <button onclick="doLogout()">LOGOUT</button> |
+            <hr>    
+            <h3><%= mainContent %></h3>
+
+        </body>
+        
+        </html>

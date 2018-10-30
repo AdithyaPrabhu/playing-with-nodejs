@@ -1,0 +1,37 @@
+<html>
+
+<head>
+    <title>
+        <%= title %>
+    </title>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            var email, pass;
+            $("#submit").click(function () {
+                var email = $("#email").val();
+                var pass = $("#password").val();
+                /*
+                * Perform some validation here.
+                */
+                $.post("http://localhost:3000/apiLoginRouter", { email: email, pass: pass }, function (data) {
+                    if (data === 'Success') {
+                        window.location.href = "/loggedin";
+                      //  alert("logged-in success")
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <h1>
+        <%= title %>
+    </h1>
+    <input type="text" size="40" placeholder="Type your email" id="email"><br /><br />
+    <input type="password" size="40" placeholder="Type your password" id="password"><br /><br />
+    <input type="button" value="Submit" id="submit">
+</body>
+
+</html>
