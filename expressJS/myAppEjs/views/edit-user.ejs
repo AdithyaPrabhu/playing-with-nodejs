@@ -1,0 +1,51 @@
+<!-- <html>
+
+<head>
+    <title>
+        <%= title %>
+    </title>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script>
+        function showUserList() {
+            window.location.href = "/api/userList";
+        }
+
+        function doLogout() {
+            location = "/login";
+        }
+
+        function showAboutUs() {
+            location = "/about-us";
+        }
+        function save() {
+            var name = $("#name").val();
+            var city = $("#city").val();
+            $.post("http://localhost:3000/api/add-user", { city: city, name: name }, function (data) {
+                if (data === 'added') {
+                    alert("success")
+                    window.location.href = "/api/userList";
+                    //  alert("logged-in success")
+                }
+            });
+        }
+    </script>
+</head>
+
+<body>
+    <h1>
+        <%= title %>
+    </h1>
+    <button>HOME</button> |
+    <button onclick="showUserList()">USER LIST</button> |
+    <button onclick="showAboutUs()">ABOUT US</button> |
+    <button onclick="doLogout()">LOGOUT</button>
+    <br/><br /> <br/><br /> Name : <input type="text" size="40" placeholder="Type your name" id="name" value=<%= name%>><br/><br /> City :
+    <input type="text" size="40" placeholder="Type your city" id="city" value=<%= city%>><br /><br />
+
+    <br/><br /> <br/><br />
+
+    <button onclick="save()" id="save">Save</button>
+
+</body>
+
+</html> -->

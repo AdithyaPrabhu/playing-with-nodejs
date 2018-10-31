@@ -22,7 +22,7 @@
             var city = $("#city").val();
             $.post("http://localhost:3000/api/add-user", { city: city, name: name }, function (data) {
                 if (data === 'added') {
-                    alert("added")
+                    alert("success")
                     window.location.href = "/api/userList";
                     //  alert("logged-in success")
                 }

@@ -1,4 +1,6 @@
 var express = require('express');
+var db = require('../databaseService');
+
 var router = express.Router();
 
 

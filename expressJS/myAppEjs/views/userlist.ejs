@@ -27,6 +27,13 @@
                 }
             });
         }
+        function doEdit(id) {
+            $.post("http://localhost:3000/api/del-user/" + id, {}, function (data) {
+                if (data === 'Success') {
+                    window.location.href = "/add-user";
+                }
+            });
+        }
     </script>
 </head>
 
@@ -38,9 +45,11 @@
     <button onclick="showUserList()">USER LIST</button> |
     <button onclick="showAboutUs()">ABOUT US</button> |
     <button onclick="doLogout()">LOGOUT</button> |
-    <hr><br>
+    <hr>
+    <br>
     <button onclick="addUser()"> + Add User</button>
-    <hr><br>
+    <hr>
+    <br>
     <div>
         <table border="1">
             <tr>
@@ -64,8 +73,12 @@
                         <%=data[i].City%>
                     </td>
 
-                    <td><button onclick="doEdit(<%=data[i].id%>);">Edit</button></td>
-                    <td><button onclick="doDelete(<%=data[i].id%>);">Delete</button></td>
+                    <td>
+                        <button onclick="doEdit(<%=data[i].id%>);">Edit</button>
+                    </td>
+                    <td>
+                        <button onclick="doDelete(<%=data[i].id%>);">Delete</button>
+                    </td>
                 </tr>
                 <% }
            

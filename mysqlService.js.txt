@@ -1,0 +1,92 @@
+var mysql = require('mysql');
+
+var pool = mysql.createPool({
+    host: 'localhost',
+    user: 'root',
+    password : 'smartant',
+    port : 3306, //port mysql
+    database:'nodejs',
+    connectionLimit: 10,
+    supportBigNumbers: true
+});
+
+
+exports.getUserRecords = function(callback) {
+  var sql = "SELECT * FROM customer";
+  pool.getConnection(function(err, connection) {
+    if(err) { console.log(err); callback(true); return; }
+    // make the query
+    connection.query(sql, function(err, results) {
+      connection.release();
+      if(err) { console.log(err); callback(true); return; }
+      callback(false, results);
+    });
+  });
+};
+
+exports.getOneRecord = function(callback, id) {
+  var sql = "SELECT * FROM customer where id ='"+id+"'";
+  pool.getConnection(function(err, connection) {
+    if(err) { console.log(err); callback(true); return; }
+    // make the query
+    connection.query(sql, function(err, results) {
+      connection.release();
+      if(err) { console.log(err); callback(true); return; }
+      callback(false, results);
+    });
+  });
+};
+
+exports.addUserRecord = function(callback, input) {
+          var data = {
+            name    : input.name,
+            address : input.address,
+            email   : input.email,
+            phone   : input.phone 
+        
+        };
+        pool.getConnection(function(err, connection) {
+          if(err) { console.log(err); callback(true); return; }
+
+        connection.query("INSERT INTO customer set ? ",data, function(err, results)
+        {
+          if(err){
+           console.log("Error Selecting : %s ",err );
+           callback(true);
+          }else{
+           callback(false, results);
+         }
+      });
+    });
+};
+
+exports.updateUserRecord = function(callback, user) {
+        pool.getConnection(function(err, connection) {
+          if(err) { console.log(err); callback(true); return; }
+
+        connection.query("UPDATE customer set ? WHERE id = ? ",[user,user.id], function(err, results)
+        {
+          if(err){
+           console.log("Error Selecting : %s ",err );
+           callback(true);
+          }else{
+           callback(false, results);
+         }
+      });
+    });
+};
+
+exports.deleteUserRecord = function(callback, id) {
+        pool.getConnection(function(err, connection) {
+          if(err) { console.log(err); callback(true); return; }
+        connection.query("DELETE from customer WHERE id = ? ",[id], function(err, results)
+        {
+          if(err){
+           console.log("Error Deleting : %s ",err );
+           callback(true);
+          }else{
+           callback(false, results);
+         }
+      });
+    });
+};
